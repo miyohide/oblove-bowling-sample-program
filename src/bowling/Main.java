@@ -37,33 +37,34 @@ public class Main {
     // 与えられた配列に対してスコアを計算する
     static public int score(int[] pins) {
         int rval = 0;
-        boolean beforeStrike = false;
-        boolean beforeSpare = false;
-        for (int i = 0 ; i < pins.length ; i++) {
-            // 最終フレームの最後の投球はボーナスを考慮しない
-            if (i == pins.length - 1) {
-                rval += pins[i];
-                break;
-            }
-            if (i >= 2 && i % 2 == 0) {
-                if (pins[i - 2] == 10) {
-                    beforeStrike = true;
-                } else if (pins[i - 2] + pins[i - 1] == 10) {
-                    beforeSpare = true;
+        for (int i = 0; i < pins.length - 1 ; i++) {
+            if (i < 16) {
+                // 第8フレームまでの処理
+                if (i % 2 == 0 && pins[i] == 10) {
+                    rval += pins[i + 2];
+                    if (pins[i + 2] == 10) {
+                        rval += pins[i + 4];
+                    } else {
+                        rval += pins[i + 3];
+                    }
+                } else if(i % 2 == 0 && pins[i] + pins[i + 1] == 10) {
+                    rval += pins[i + 2];
                 }
-            }
-            if (beforeStrike) {
-                rval += pins[i];
-            }
-            if (beforeSpare && i % 2 == 0) {
-                rval += pins[i];
+            } else if (i < 18) {
+                // 第9フレームの処理
+                if (i % 2 == 0 && pins[i] == 10) {
+                    rval += pins[i + 2] + pins[i + 3];
+                } else if(i % 2 == 0 && pins[i] + pins[i + 1] == 10) {
+                    rval += pins[i + 2];
+                }
+            } else {
+                // 第10フレームの処理は3投の合計のみとなる。
             }
             rval += pins[i];
-            if (i % 2 == 1) {
-                beforeStrike = beforeSpare = false;
-            }
         }
+        rval += pins[pins.length - 1];
         return rval;
+
     }
 
 }

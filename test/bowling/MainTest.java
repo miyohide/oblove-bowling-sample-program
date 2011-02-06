@@ -24,6 +24,7 @@ public class MainTest {
         assertEquals(expResult, result);
     }
 */
+
     @Test
     // Problem 2. スペアやストライクを考慮する
     public void testScore() {
@@ -201,5 +202,28 @@ public class MainTest {
         assertEquals(109, m.score());
     }
 
+    @Test
+    // ダブルの例。
+    public void testScore_double() {
+        int[] pins = {10,0,10,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+        int act = Main.score(pins);
+        assertEquals(33, Main.score(pins));
+    }
+
+    @Test
+    // ターキーの例。
+    public void testScore_turkey() {
+        int[] pins = {10,0,10,0,10,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+        int act = Main.score(pins);
+        assertEquals(63, Main.score(pins));
+    }
+
+    @Test
+    // パーフェクトの例。
+    public void testScore_perfect() {
+        int[] pins = {10,0,10,0,10,0,10,0,10,0,10,0,10,0,10,0,10,0,10,10,10};
+        int act = Main.score(pins);
+        assertEquals(300, Main.score(pins));
+    }
 
 }
