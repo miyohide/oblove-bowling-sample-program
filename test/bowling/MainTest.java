@@ -226,4 +226,20 @@ public class MainTest {
         assertEquals(300, Main.score(pins));
     }
 
+    @Test
+    // 第9フレームがスペア。
+    public void testScore_pattern1() {
+        int[] pins = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,9,10,0,0};
+        int act = Main.score(pins);
+        assertEquals(30, Main.score(pins));
+    }
+
+    @Test
+    // 第10フレームがスペア。
+    public void testScore_pattern2() {
+        int[] pins = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,9,1};
+        int act = Main.score(pins);
+        assertEquals(11, Main.score(pins));
+    }
+
 }
