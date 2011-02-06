@@ -6,6 +6,35 @@ public class Main {
         // TODO code application logic here
     }
 
+    private int bowlIndex = 0;
+    private int[] scoreLog = new int[21];
+    private boolean beforeStrike = false;
+    private boolean beforeSpare = false;
+
+    public Main() {
+        // スコアの初期化
+        for (int i = 0; i < scoreLog.length ; i++){
+            scoreLog[i] = 0;
+        }
+    }
+
+    // 与えられたピンの数に対して現在のスコアを計算する
+    public void bowl(int pins) {
+        scoreLog[bowlIndex] = pins;
+        bowlIndex++;
+        if (bowlIndex > 2*9) {
+            // 10ピン倒しても何もしない
+        } else if (pins == 10 && bowlIndex % 2 == 1) {
+            scoreLog[bowlIndex] = 0;
+            bowlIndex++;
+        }
+    }
+
+    public int score() {
+        return score(scoreLog);
+    }
+
+    // 与えられた配列に対してスコアを計算する
     static public int score(int[] pins) {
         int rval = 0;
         boolean beforeStrike = false;

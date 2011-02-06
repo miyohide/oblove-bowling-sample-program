@@ -111,4 +111,95 @@ public class MainTest {
         assertEquals(expResult, result);
     }
 
+    @Test
+    // 問題3。途中でも計算できるようにする。第1フレーム、1投目
+    public void testScore_1stFrame1() {
+        Main m = new Main();
+        m.bowl(1);
+        assertEquals(1,m.score());
+    }
+
+    @Test
+    // 問題3。途中でも計算できるようにする。第1フレーム、2投目
+    public void testScore_1stFrame2() {
+        Main m = new Main();
+        m.bowl(1);
+        m.bowl(2);
+        assertEquals(3,m.score());
+    }
+
+    @Test
+    // 問題3。途中でも計算できるようにする。第2フレーム、1投目、前フレームスペア
+    public void testScore_2ndFrame1_spare() {
+        Main m = new Main();
+        m.bowl(1);
+        m.bowl(9);
+        m.bowl(2);
+        assertEquals(14,m.score());
+    }
+
+    @Test
+    // 問題3。途中でも計算できるようにする。第2フレーム、2投目、前フレームスペア
+    public void testScore_2ndFrame2_spare() {
+        Main m = new Main();
+        m.bowl(1);
+        m.bowl(9);
+        m.bowl(2);
+        m.bowl(3);
+        assertEquals(17,m.score());
+    }
+
+    @Test
+    // 問題3。途中でも計算できるようにする。第2フレーム、1投目、前フレームスペア（0 -> 10)
+    public void testScore_2ndFrame1_spare0to10() {
+        Main m = new Main();
+        m.bowl(0);
+        m.bowl(10);
+        m.bowl(2);
+        assertEquals(14,m.score());
+    }
+
+    @Test
+    // 問題3。途中でも計算できるようにする。第2フレーム、2投目、前フレームスペア（0 -> 10)
+    public void testScore_2ndFrame2_spare0to10() {
+        Main m = new Main();
+        m.bowl(0);
+        m.bowl(10);
+        m.bowl(2);
+        m.bowl(3);
+        assertEquals(17,m.score());
+    }
+
+    @Test
+    // 問題3。途中でも計算できるようにする。第2フレーム、1投目、前フレームストライク
+    public void testScore_2ndFrame1_strike() {
+        Main m = new Main();
+        m.bowl(10);
+        m.bowl(2);
+        assertEquals(14,m.score());
+    }
+
+    @Test
+    // 問題3。途中でも計算できるようにする。第2フレーム、2投目、前フレームストライク
+    public void testScore_2ndFrame2_strike() {
+        Main m = new Main();
+        m.bowl(10);
+        m.bowl(2);
+        m.bowl(3);
+        assertEquals(20,m.score());
+    }
+
+    @Test
+    // 問題3。 全ゲーム
+    public void testScore_FullFrame() {
+        Main m = new Main();
+        int[] pins = {1,4,2,8,5,0,10,0,4,5,5,2,0,6,1,10,10,5,5};
+        for (int pin : pins) {
+            m.bowl(pin);
+        }
+        int a = m.score();
+        assertEquals(109, m.score());
+    }
+
+
 }
