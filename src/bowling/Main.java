@@ -37,7 +37,7 @@ public class Main {
     // 与えられた配列に対してスコアを計算する
     static public int score(int[] pins) {
         int rval = 0;
-        for (int i = 0; i < pins.length - 1 ; i++) {
+        for (int i = 0; i < pins.length ; i++) {
             if (i < 16) {
                 // 第8フレームまでの処理
                 if (i % 2 == 0 && pins[i] == 10) {
@@ -62,7 +62,6 @@ public class Main {
             }
             rval += pins[i];
         }
-        rval += pins[pins.length - 1];
         return rval;
 
     }
